@@ -1,0 +1,110 @@
+{
+  "main": {
+    "id": "66860c359401e22f",
+    "type": "split",
+    "children": [
+      {
+        "id": "e90751d83a6a2cbb",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "Levantamento de informações.md",
+            "mode": "source"
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "44c9f6a5d1e6a2f7",
+    "type": "split",
+    "children": [
+      {
+        "id": "7a852ec958b6f802",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "2bde488c924d85c4",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "ba723f4999e5f090",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "Intrudoção",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "0068a28edd50c983",
+    "type": "split",
+    "children": [
+      {
+        "id": "35941feb5aeb5528",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "3936186b627738a4",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Levantamento de informações.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "4f634fef62d42f14",
+            "type": "leaf",
+            "state": {
+              "type": "dictionary-view",
+              "state": {}
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "e90751d83a6a2cbb",
+  "lastOpenFiles": [
+    "Levantamento de informações.md",
+    "MindMap.md",
+    "docker-steps.md",
+    "MyMindMap.md",
+    "metadata.md",
+    "mindMap.png",
+    "myrelle/DOCKER-Instancia_Amazon_EC2.pdf",
+    "myrelle/Comando-Docker.pdf",
+    "imgs/dockerhub.png"
+  ]
+}

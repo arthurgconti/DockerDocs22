@@ -1,0 +1,11 @@
+{
+  "vimMode": true,
+  "spellcheck": false,
+  "spellcheckDictionary": [
+    "container",
+    "hub",
+    "flag",
+    "DockerHub",
+    "docker"
+  ]
+}
