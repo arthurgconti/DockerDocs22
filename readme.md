@@ -41,7 +41,7 @@ docker pull node
  # ou
  docker images
  ```
- - Caso você não queria fazer o processo de baixar uma imagem para só depois rodar o container, você pode fazer o download da imagina direto na instanciação do container, nosso próximo tópico
+ - Caso você não queria fazer o processo de baixar uma imagem para só depois rodar o container, você pode fazer o download da imagem direto na instanciação do container, como abordaremos no nosso próximo tópico
 ---
 
 ### Instanciação do Container
@@ -52,19 +52,27 @@ docker pull node
 docker run [opções/flags] nome_da_imagem
 ```
 >O comando docker *run*, na realidade faz a função de outros dois comandos simultaneamente, o *docker create* e o *docker start*, porém podemos utilizar o run sem problemas : )
+
 - Esse comando possuí diversas flags porém vamos ver as principais aqui
 
-| flag      | significado         | função                                                                                                                                        |
-| --------- | ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| --rm      | Remove              | Remove o container se ele já existir                                                                                                          |
-| -d        | Desacoplar (detach) | Roda o container em background e retorna o id                                                                                                 |
-| --name    | Nome do container   | Permite nomear o container que será criado                                                                                                    |
-| -v        | Volumes             | Vincula o ponto de montagem dos volumes                                                                                                       |
-| -p        | publicar portas     | Torna pública uma porta para o host, deixando o container acessível deve ser usado da seguinte forma  portaHost:portaContainer, mapeia portas |
-| -e        | Ambiente            | Responsável por setar variáveis de ambiente ao container                                                                                      |
-| -t        | terminal            | Acopla um pseudo-terminal ao container                                                                                                        |
-| --link    |                     |                                                                                                                                               |
-| --network |                     |                                                                                                                                               |
+| Flag      | Significado           | Paramêtros                                                                     | função                                                                                                                                                                                                                         |
+| --------- | --------------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| --rm      | Remover               | nenhum                                                                         | Automaticamente remove o container quando ele terminar/parar                                                                                                                                                                   |
+| -d        | Desacoplar (detach)   | nenhum                                                                         | Roda o container em background e retorna o id                                                                                                                                                                                  |
+| --name    | Nome do container     | nome que deseja para o container (o docker gera um nome aleatório se não usar) | Permite nomear o container que será criado                                                                                                                                                                                     |
+| -v        | Volumes               | pastHost:pastContainer (./data:/usr/share/www)                                 | Vincula o ponto de montagem dos volumes, a pasta local com a pasta interna do container                                                                                                                                        |
+| -p        | Publicar portas       | portaHost:portaContainer (7777:3306)                                           | Torna pública uma porta para o host, deixando o container acessível deve ser usado da seguinte forma  portaHost:portaContainer, mapeia portas                                                                                  |
+| -e        | Variáveis de ambiente | VARIAVEL_AMBIENTE=valor  (-e POSTGRES_PASSWORD=password)                       | Responsável por setar variáveis de ambiente ao container                                                                                                                                                                       |
+| -t        | Terminal              | nenhum                                                                         | Acopla um pseudo-terminal ao container                                                                                                                                                                                         |
+| -i        | Iterativo             | nenhum                                                                         | O processo não vai ser finalizado até a conclusão                                                                                                                                                                              |
+| --network | Rede                  | nome da rede criada                                                            | Conecta o container a uma rede específica de container                                                                                                                                                                         |
+| --link    | Vincular              | nome do container                                                              | Vincula um container a outro ou outros containers, podendo substituir o ip nos projetos pelo nome do container                                                                                                                 |
+| --restart | reiniciar             | opções:  {no,on-failure,on-failure:máximoTentativas,unless-stopped,always}     | Define a política para reiniciar o container, padrão é *no*, ou seja, o docker nunca vai reiniciar o container, as outras políticas definem a condição para que o docker reinicie o container baseado em quando ele parar/sair |
+
+
+> A flag -i pode ser combinada com a flag t e/ou com a flag -d, ficando *-dit*
+
+
 
 
 

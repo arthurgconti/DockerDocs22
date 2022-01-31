@@ -7,5 +7,6 @@
     "flag",
     "DockerHub",
     "docker"
-  ]
+  ],
+  "readableLineLength": false
 }

@@ -9,8 +9,8 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "Levantamento de informações.md",
-            "mode": "source"
+            "file": "readme.md",
+            "mode": "preview"
           }
         }
       }
@@ -68,7 +68,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Levantamento de informações.md",
+                "file": "readme.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -97,10 +97,11 @@
   },
   "active": "e90751d83a6a2cbb",
   "lastOpenFiles": [
+    "readme.md",
+    "MyMindMap.md",
     "Levantamento de informações.md",
     "MindMap.md",
     "docker-steps.md",
-    "MyMindMap.md",
     "metadata.md",
     "mindMap.png",
     "myrelle/DOCKER-Instancia_Amazon_EC2.pdf",
