@@ -69,11 +69,16 @@ docker run [opções/flags] nome_da_imagem
 | --link    | Vincular              | nome do container                                                              | Vincula um container a outro ou outros containers, podendo substituir o ip nos projetos pelo nome do container                                                                                                                 |
 | --restart | reiniciar             | opções:  {no,on-failure,on-failure:máximoTentativas,unless-stopped,always}     | Define a política para reiniciar o container, padrão é *no*, ou seja, o docker nunca vai reiniciar o container, as outras políticas definem a condição para que o docker reinicie o container baseado em quando ele parar/sair |
 
-
 > A flag -i pode ser combinada com a flag t e/ou com a flag -d, ficando *-dit*
 
-
-
-
-
-
+- Um exemplo de docker run utilizando uma imagem node que não existe localmente e alguma das flags descritas
+![Baixando imagem node e instanciando container](imgs/docker-run-without-image.png)
+- Após instanciarmos um container, ou vários containers, podemos listar os containers ativos usando o comando:
+```bash
+docker ps
+```
+- Caso você queira listar todos os containers que você tem criado e informações específicas de cada um, basta usar o comando:
+```bash
+docker ps -a
+```
+![Docker ps -a para mostrar todos os containers criados](imgs/docker-ps-a.png)

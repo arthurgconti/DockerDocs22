@@ -8,5 +8,7 @@
     "DockerHub",
     "docker"
   ],
-  "readableLineLength": false
+  "readableLineLength": false,
+  "legacyEditor": false,
+  "livePreview": false
 }

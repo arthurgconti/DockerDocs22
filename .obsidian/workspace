@@ -10,7 +10,8 @@
           "type": "markdown",
           "state": {
             "file": "readme.md",
-            "mode": "preview"
+            "mode": "source",
+            "source": true
           }
         }
       }
@@ -52,7 +53,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "0068a28edd50c983",
