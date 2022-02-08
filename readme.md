@@ -82,3 +82,32 @@ docker ps
 docker ps -a
 ```
 ![Docker ps -a para mostrar todos os containers criados](imgs/docker-ps-a.png)
+- Para pararmos a execução de um container utilizamos o comando
+```bash
+docker stop nome_container|id_container
+```
+![Docker stop para parar um container em execução](imgs/docker-stop-container.png)
+- E após pararmos um container, ou quando iniciamos nosso computador, para subir um iniciar um container criado, utilizamos
+```bash
+docker start nome_container|id_container
+```
+![Docker stop para parar um container em execução](imgs/docker-start-container.png)
+
+Nessa momento, já sabemos como procurar imagens na internet e onde encontra-las, também aprendemos a instanciar, parar e subir novamente um container!
+- Subimos um container node, para demonstrar como funciona, porém, esse container node, ainda não terá tanta utilidade, voltaremos a utilizar ele mais para frente quando falarmos de Dockerfile, porém, vamos agora, fazer a instanciação completa de um container com uma coisa que para nós programadores é de suma importância, um SGBD, ao invés de baixarmos diversos gerenciadores, podemos ter várias imagens configuradas e só subirmos quando e qual for necessária!
+
+- Vamos começar com o MySQL e no final do documento teremos um exemplo com o Postgres, pois conseguiremos exercitar diversas flags e conceitos!
+Como vimos, devemos sempre começar pela imagem, nesse exemplo, utilizaremos a imagem oficial do DockerHub [disponível nesse link](https://hub.docker.com/_/mysql?tab=description)
+- Tendo escolhido nossa imagem, podemos rodar o seguinte comando para instanciar nosso container, tendo em mente, que optamos pelo donwload da imagem na nuvem
+```bash
+docker run -d --name exemploMySql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root mysql:latest
+```
+*Observação a variável de ambiente **MYSQL_ROOT_PASSWORD** é obrigatória para definirmos a senha padrão de acesso ao bd, e essa variável está na documentação oficial da imagem, o usuário por padrão do mysql é o **root** * 
+- Ao rodarmos esse comando e logo na sequência 
+```bash
+ docker ps
+```
+- Obtemos o seguinte retorno no terminal
+![Docker run and docker PS](imgs/docker-run-mysql-ps-a.png)
+- Podemos visualizar também os container ativos e desativos por uma interface, como, por exemplo do ctop, em verde todos os containers rodando, e em vermelho, o que estão parados
+![Docker Ctop](imgs/ctop.png)

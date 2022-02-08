@@ -53,8 +53,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "0068a28edd50c983",
@@ -100,14 +99,14 @@
   "active": "e90751d83a6a2cbb",
   "lastOpenFiles": [
     "readme.md",
+    "docker-steps.md",
+    "imgs/docker-stop-container.png",
     "MyMindMap.md",
     "Levantamento de informações.md",
     "MindMap.md",
-    "docker-steps.md",
     "metadata.md",
     "mindMap.png",
     "myrelle/DOCKER-Instancia_Amazon_EC2.pdf",
-    "myrelle/Comando-Docker.pdf",
-    "imgs/dockerhub.png"
+    "myrelle/Comando-Docker.pdf"
   ]
 }
