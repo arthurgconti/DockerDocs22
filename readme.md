@@ -109,5 +109,15 @@ docker run -d --name exemploMySql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root mysql
 ```
 - Obtemos o seguinte retorno no terminal
 ![Docker run and docker PS](imgs/docker-run-mysql-ps-a.png)
-- Podemos visualizar também os container ativos e desativos por uma interface, como, por exemplo do ctop, em verde todos os containers rodando, e em vermelho, o que estão parados
+- Podemos visualizar também os container ativos e desativos por uma interface, como, por exemplo do [ctop](https://github.com/bcicen/ctop), em verde todos os containers rodando, e em vermelho, o que estão parados
 ![Docker Ctop](imgs/ctop.png)
+- Podemos ver os logs desse container rodando utilizando o comando
+```bash
+docker logs exemploMysql
+```
+e temos de retorno do comando todos os logs que o container emitiu
+![Docker logs](imgs/docker-logs.png)
+- Na sequência, precisamos executar alguns comandos, como por exemplo rodar um script para criar nosso banco de dados e nossa tabela, existem diversas formas para se fazer isso, nesse exemplo, vamos passar um script sql para nosso banco de dados, esses script foi previamente criado e não entraremos em detalhe de como criá-lo pois não é o nosso foco, após isso entraremos no banco para vermos se tudo foi executado corretamente, para isso, precisamos usar o comando **docker exec**, que vamos detalhar abaixo:
+```bash
+docker exec -i newExemplo mysql -uroot -proot < exemplo.sql
+```

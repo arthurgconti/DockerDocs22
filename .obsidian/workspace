@@ -4,7 +4,7 @@
     "type": "split",
     "children": [
       {
-        "id": "e90751d83a6a2cbb",
+        "id": "0ba74be42daaea2d",
         "type": "leaf",
         "state": {
           "type": "markdown",
@@ -96,16 +96,16 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "e90751d83a6a2cbb",
+  "active": "0ba74be42daaea2d",
   "lastOpenFiles": [
     "readme.md",
+    "mindMap.png",
     "docker-steps.md",
     "imgs/docker-stop-container.png",
     "MyMindMap.md",
     "Levantamento de informações.md",
     "MindMap.md",
     "metadata.md",
-    "mindMap.png",
     "myrelle/DOCKER-Instancia_Amazon_EC2.pdf",
     "myrelle/Comando-Docker.pdf"
   ]
