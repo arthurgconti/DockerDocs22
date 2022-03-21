@@ -119,5 +119,32 @@ e temos de retorno do comando todos os logs que o container emitiu
 ![Docker logs](imgs/docker-logs.png)
 - Na sequência, precisamos executar alguns comandos, como por exemplo rodar um script para criar nosso banco de dados e nossa tabela, existem diversas formas para se fazer isso, nesse exemplo, vamos passar um script sql para nosso banco de dados, esses script foi previamente criado e não entraremos em detalhe de como criá-lo pois não é o nosso foco, após isso entraremos no banco para vermos se tudo foi executado corretamente, para isso, precisamos usar o comando **docker exec**, que vamos detalhar abaixo:
 ```bash
+docker exec [FLAGS] container [COMANDO]
+```
+- *O docker exec aceita qualquer comando Linux ou referente a imagem como o mysql*
+
+| **flag** | **significado** | **paramêtros** | **função**                                                                                            |
+| -------- | --------------- | -------------- | ----------------------------------------------------------------------------------------------------- |
+| -i       | Interativo      | Nenhum         | Mantém a interação no terminal enquanto o comando do container está em execução                       |
+| -t       | TTY (terminal)  | nenhum         | Aloca um terminal ao container
+|          |                 |                |                                                                                                       |
+
+- Nesse nosso exemplo, vamos passar o comando de conexão ao banco mysql com o usuário e a senha e logo após com o operador < passamos o arquivo para ser executado pelo mysql, dessa forma nosso banco será criado.
+```bash
 docker exec -i newExemplo mysql -uroot -proot < exemplo.sql
+```
+- Para vermos se o banco foi criado, temos diversas formas de fazer, mas iremos via terminal, para isso precisaremos acessar o mysql via linha de comando e passar os comandos para visualização de banco de dados e tabelas!
+- Segue o fio:
+```bash
+# Instanciando o terminal e acessando o mysql
+docker exec -it newExemplo mysql -uroot -proot
+
+# Dentro do terminal do mysql digitamos para vermos se o banco está criado
+show databases;
+# Após isso executamos para ver se nossa tabela está criada corretamente dentro do banco
+use teste; show tables;
+# Após isso podemos usar o select e confirmar se os dados foram inseridos corretamentes
+select * from pessoa;
+# E finalmente para sairmos do terminal basta digitar o comando
+exit
 ```
