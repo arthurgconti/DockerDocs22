@@ -10,7 +10,7 @@
           "type": "markdown",
           "state": {
             "file": "readme.md",
-            "mode": "preview",
+            "mode": "source",
             "source": true
           }
         }
@@ -53,8 +53,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "0068a28edd50c983",
@@ -108,12 +107,12 @@
   "active": "0ba74be42daaea2d",
   "lastOpenFiles": [
     "readme.md",
+    "docker-steps.md",
     "mindMap.png",
     "imgs/docker-stop-container.png",
     "imgs/docker-ps-a.png",
     "imgs/docker-images.png",
     "imgs/ctop.png",
-    "docker-steps.md",
     "MyMindMap.md",
     "Levantamento de informações.md",
     "MindMap.md"

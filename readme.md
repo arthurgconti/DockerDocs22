@@ -155,5 +155,7 @@ exit
 - Dockerfile nada mais é do que um arquivo onde conseguimos especificar todos os comandos que poderiamos passar pela linha de comando para criarmos uma imagem
 - Após escrevermos todas as instruções basta rodar o comando 
 ```
-docker build
+docker build -f [file] -t [tagname] [CONTEXT] 
 ```
+| **flag** | **significado** |    **parâmetro** |**função**     |
+| ---- | ------ | --- | --- |
