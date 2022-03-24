@@ -148,3 +148,12 @@ select * from pessoa;
 # E finalmente para sairmos do terminal basta digitar o comando
 exit
 ```
+
+
+# Dockerfile
+## O que é?
+- Dockerfile nada mais é do que um arquivo onde conseguimos especificar todos os comandos que poderiamos passar pela linha de comando para criarmos uma imagem
+- Após escrevermos todas as instruções basta rodar o comando 
+```
+docker build
+```

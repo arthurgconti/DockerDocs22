@@ -10,7 +10,7 @@
           "type": "markdown",
           "state": {
             "file": "readme.md",
-            "mode": "source",
+            "mode": "preview",
             "source": true
           }
         }
@@ -109,13 +109,13 @@
   "lastOpenFiles": [
     "readme.md",
     "mindMap.png",
-    "docker-steps.md",
     "imgs/docker-stop-container.png",
+    "imgs/docker-ps-a.png",
+    "imgs/docker-images.png",
+    "imgs/ctop.png",
+    "docker-steps.md",
     "MyMindMap.md",
     "Levantamento de informações.md",
-    "MindMap.md",
-    "metadata.md",
-    "myrelle/DOCKER-Instancia_Amazon_EC2.pdf",
-    "myrelle/Comando-Docker.pdf"
+    "MindMap.md"
   ]
 }

@@ -1,5 +1,3 @@
-### criando a imagem
-
 va até a pasta raiz e execute
 docker build path_docker -t nome_da_imagem -f path_to_dockerfile
 
