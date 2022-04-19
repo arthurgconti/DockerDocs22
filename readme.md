@@ -155,7 +155,19 @@ exit
 - Dockerfile nada mais é do que um arquivo onde conseguimos especificar todos os comandos que poderiamos passar pela linha de comando para criarmos uma imagem
 - Após escrevermos todas as instruções basta rodar o comando 
 ```
-docker build -f [file] -t [tagname] [CONTEXT] 
+docker build -f [file] -t [tagname] [PATH] 
 ```
-| **flag** | **significado** |    **parâmetro** |**função**     |
-| ---- | ------ | --- | --- |
+| **flag** | **significado** | **parâmetro**      | **função**                                                                                                                                                                                                                                |
+| -------- | --------------- | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| -f       | file            | nome do Dockerfile | Especificar qual o arquivo vai servir de base para a construção da imagem, por padrão, o docker build procura no contexto o arquvio chamado Dockerfile, mas através desse comando pode-se especificar outro caminho para outra dockerfile |
+| -t       | tagname         | nome da imagem (name:tag)     | Especificar qual será o nome customizado da imagem, a tag que vem após o nome é opcional                                                                                                                                                                                       |
+- Temos também o PATH, o PATH especifica onde encontrar os arquivos para o contexto de criação da imagem, o path pode ser um caminho para pasta, uma url ou até mesmo um repositório do git, aqui, nos limitaremos a trabalhar só com o caminho para pastas locais
+
+## Como é um Dockerfile?
+- O Dockerfile, possui diversos comandos para dar suporte a criação de uma imagem customizada, veremos alguns exemplos e detalharemos alguns dos comandos principais!
+
+```Dockerfile
+FROM
+COPY 
+CMD
+```
