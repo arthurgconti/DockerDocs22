@@ -152,7 +152,7 @@ exit
 
 # Dockerfile
 ## O que é?
-- Dockerfile nada mais é do que um arquivo onde conseguimos especificar todos os comandos que poderiamos passar pela linha de comando para criarmos uma imagem
+- Dockerfile nada mais é do que um arquivo onde conseguimos especificar todos os comandos que poderiamos passar pela linha de comando para criarmos nossa própria imagem
 - Após escrevermos todas as instruções basta rodar o comando 
 ```
 docker build -f [file] -t [tagname] [PATH] 
@@ -171,3 +171,17 @@ FROM
 COPY 
 CMD
 ```
+
+| Instruções    | Função                                                                                                                                                           |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| FROM       | Ponto de partida para a criação de uma imagem, se quiser algo baseado em Mysql, pode especificar, se quiser fazer uma imagem do zero, basta infromar **SCRATCH** |
+| RUN        | Pode ser executada uma ou mais vezes, definimos quais os comandos serão executados nas etapas de criação de uma imagem.                                          |
+| CMD        | Definimos quais comandos serão executados na etapa de criação do container, caso o container não tenha nenhum comando                                            |
+| ENTRYPOINT | A mesma coisa que o *CMD* porém seus parâmetros não são sobreescritos                                                                                            |
+| ADD        | Fazer cópia de arquivos, diretório ou até mesmo baixar arquivos, na máquina host para a imagem                                                                   |
+| COPY       | Permite apenas a passagem de arquivos ou diretórios, diferente do *ADD* que permite downloads                                                                    |
+| EXPOSE     | Serve para documentar qual a porta será exposta, mas efetivamente **não** publica a porta                                                                        |
+| VOLUME     | Cria uma pasta que será compartilhada entre o container e o host                                                                                                 |
+| WORKDIR    | Tem o propósito de definir onde as instruções acima executarão suas tarefas, além de definir o diretório padrão que será aberto ao executarmos o container       |
+
+- Agora, vamos a um exemplo prático de como utilizar essas instruções!
