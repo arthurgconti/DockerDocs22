@@ -1,8 +1,13 @@
 import { Router } from "express";
-import PersonController from "./controller/controller.person.js";
+import {
+  createPessoa,
+  getPessoas,
+  getPessoa,
+  updatePessoa,
+  deletePessoa,
+} from "./controller/controller.person.js";
 
 const routes = Router();
-const controller = new PersonController();
 
 routes.get("/", (req, res) => {
   res.send("Olá bem vindo ao servidor express");
@@ -21,10 +26,10 @@ routes.get("/monitoria", (req, res) => {
   );
 });
 
-routes.post("/pessoa",controller.createPessoa);
-routes.get("/pessoas",controller.getPessoas);
-routes.get("/pessoa/:id",controller.getPessoa);
-routes.put("/pessoa/:id",controller.updatePessoa);
-routes.delete("/pessoa/:id",controller.deletePessoa);
+routes.post("/pessoa", createPessoa);
+routes.get("/pessoas", getPessoas);
+routes.get("/pessoa/:id", getPessoa);
+routes.put("/pessoa/:id", updatePessoa);
+routes.delete("/pessoa/:id", deletePessoa);
 
 export default routes;
