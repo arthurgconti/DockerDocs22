@@ -185,3 +185,24 @@ CMD
 | WORKDIR    | Tem o propósito de definir onde as instruções acima executarão suas tarefas, além de definir o diretório padrão que será aberto ao executarmos o container       |
 
 - Agora, vamos a um exemplo prático de como utilizar essas instruções!
+- Vamos criar uma aplicação básica em nodejs, só para acessarmos algumas rotas e você poderão ver diversas partes do Dockerfile em ação
+- *o código em JS é um exemplo simples e estará disponibilizado, pois, todo o desenvolvimento dele não faz parte dessa matéria*
+```Dockerfile
+#Especificando qual imagem vamos utilizar de base
+FROM node
+#Indicamos a pasta que será criada dentro do container, para ser o ponto inicial dos arquivos
+WORKDIR /server-example
+#Copiando o arquivo package.json da pasta atual para a pasta server-example do container
+COPY package.json .
+# Copiando o server.js da pasta atual para a pasta server-example do container
+ADD server.js .
+# Documentando que o container terá a porta 3000 exposta
+EXPOSE 3000
+
+  
+# rodando npm install durante a criação da imagem, para quando baixarmos ela já vir com o node_modules pronto
+RUN npm install
+# Rodando npm start após a criação do container para o container já subir com o servidor inicializado
+CMD ["npm","start"]
+```
+
