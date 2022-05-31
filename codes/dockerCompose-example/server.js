@@ -1,11 +1,11 @@
 import express from "express";
-import routes from "./routes.js";
+import rotas from "./routes.js";
 
 const app = express();
 const port = 3000;
 
 app.use(express.json());
-app.use(routes);
+app.use(rotas);
 
 
 app.listen(port, () => {

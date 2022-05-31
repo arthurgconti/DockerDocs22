@@ -5,7 +5,7 @@ import {
   getPessoa,
   updatePessoa,
   deletePessoa,
-} from "./controller/controller.person.js";
+} from "./controller/controller.pessoa.js";
 
 const routes = Router();
 
