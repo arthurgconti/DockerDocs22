@@ -12,6 +12,7 @@
 <script>
 import { h, defineComponent } from "vue";
 import { NButton, NDataTable } from "naive-ui";
+import Api from "../provider/api.provider";
 
 const createColumns = ({ play }) => {
   return [
@@ -46,12 +47,16 @@ const createColumns = ({ play }) => {
   ];
 };
 
-const data = [
-  { id: 3, nome: "Wonderwall", idade: 4 },
-  { id: 4, nome: "Don't Look Back in Anger", idade: 4 },
-  { id: 12, nome: "Champagne Supernova", idade: 7 },
-];
+const data = [];
+Api.get("/pessoas")
+  .then((response) => {
+    response.data.forEach((dataResponse) => {
+      data.push(dataResponse);
+    });
+  })
+  .catch((e) => console.error(e.message));
 
+console.log(data);
 export default defineComponent({
   components: {
     NDataTable,
