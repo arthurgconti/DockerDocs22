@@ -1,9 +1,7 @@
 <script setup>
-import TheWelcome from "@/components/TheWelcome.vue";
+import TableUser from "../components/TableUser.vue";
 </script>
 
 <template>
-  <main>
-    <TheWelcome />
-  </main>
+  <TableUser />
 </template>
