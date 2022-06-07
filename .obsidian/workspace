@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "docker-steps.md",
+            "file": "readme.md",
             "mode": "preview",
             "source": true
           }
@@ -70,7 +70,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "docker-steps.md",
+                "file": "readme.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -107,8 +107,8 @@
   },
   "active": "0ba74be42daaea2d",
   "lastOpenFiles": [
-    "docker-steps.md",
     "readme.md",
+    "docker-steps.md",
     "mindMap.png",
     "imgs/docker-stop-container.png",
     "imgs/docker-ps-a.png",
