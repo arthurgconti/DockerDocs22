@@ -23,7 +23,7 @@ docker pull nome_da_imagem:tag [opções/flags]
  ![dockerHub node example](imgs/dockerhub.png)
  > Note que existe uma insignia verde escrita "oficial image", isso significa que essa imagem é uma imagem curada e mantida por eles, elas provem a base para a utilização sem problemas, além de estarem sempre atualizadas servem de ponto de partida para a maioria dos usuários.
  
- 2. 
+ 2. Após encontrarmos a imagem, podemos baixar ela utilizando o comando abaixo:
  
 ```bash
 docker pull node 
@@ -42,6 +42,11 @@ docker pull node
  docker images
  ```
  - Caso você não queria fazer o processo de baixar uma imagem para só depois rodar o container, você pode fazer o download da imagem direto na instanciação do container, como abordaremos no nosso próximo tópico
+
+- Se quisermos remover ou apagar uma imagem utilizamos o seguinte comando:
+```bash
+docker image rm [NOME_DA_IMAGEM]
+```
 ---
 
 ### Instanciação do Container
@@ -98,9 +103,11 @@ Nessa momento, já sabemos como procurar imagens na internet e onde encontra-las
 
 - Vamos começar com o MySQL e no final do documento teremos um exemplo com o Postgres, pois conseguiremos exercitar diversas flags e conceitos!
 Como vimos, devemos sempre começar pela imagem, nesse exemplo, utilizaremos a imagem oficial do DockerHub [disponível nesse link](https://hub.docker.com/_/mysql?tab=description)
-- Tendo escolhido nossa imagem, podemos rodar o seguinte comando para instanciar nosso container, tendo em mente, que optamos pelo donwload da imagem na nuvem
+- Tendo escolhido nossa imagem, podemos rodar o seguinte comando para instanciar nosso container, tendo em mente, que optamos pelo download da imagem na nuvem
 ```bash
 docker run -d --name exemploMySql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root mysql:latest
+#vamos também criar um container para podermos remover futuramente
+docker run -d --name containerRemover -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root mysql:latest
 ```
 *Observação a variável de ambiente **MYSQL_ROOT_PASSWORD** é obrigatória para definirmos a senha padrão de acesso ao bd, e essa variável está na documentação oficial da imagem, o usuário por padrão do mysql é o **root** * 
 - Ao rodarmos esse comando e logo na sequência 
@@ -113,7 +120,7 @@ docker run -d --name exemploMySql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root mysql
 ![Docker Ctop](imgs/ctop.png)
 - Podemos ver os logs desse container rodando utilizando o comando
 ```bash
-docker logs exemploMysql
+docker logs exemploMySql
 ```
 e temos de retorno do comando todos os logs que o container emitiu
 ![Docker logs](imgs/docker-logs.png)
@@ -126,18 +133,17 @@ docker exec [FLAGS] container [COMANDO]
 | **flag** | **significado** | **paramêtros** | **função**                                                                                            |
 | -------- | --------------- | -------------- | ----------------------------------------------------------------------------------------------------- |
 | -i       | Interativo      | Nenhum         | Mantém a interação no terminal enquanto o comando do container está em execução                       |
-| -t       | TTY (terminal)  | nenhum         | Aloca um terminal ao container
-|          |                 |                |                                                                                                       |
+| -t       | TTY (terminal)  | nenhum         | Aloca um terminal ao container|
 
 - Nesse nosso exemplo, vamos passar o comando de conexão ao banco mysql com o usuário e a senha e logo após com o operador < passamos o arquivo para ser executado pelo mysql, dessa forma nosso banco será criado.
 ```bash
-docker exec -i newExemplo mysql -uroot -proot < exemplo.sql
+docker exec -i exemploMySql mysql -uroot -proot < exemplo.sql
 ```
 - Para vermos se o banco foi criado, temos diversas formas de fazer, mas iremos via terminal, para isso precisaremos acessar o mysql via linha de comando e passar os comandos para visualização de banco de dados e tabelas!
 - Segue o fio:
 ```bash
 # Instanciando o terminal e acessando o mysql
-docker exec -it newExemplo mysql -uroot -proot
+docker exec -it exemploMySql mysql -uroot -proot
 
 # Dentro do terminal do mysql digitamos para vermos se o banco está criado
 show databases;
@@ -148,7 +154,11 @@ select * from pessoa;
 # E finalmente para sairmos do terminal basta digitar o comando
 exit
 ```
-
+- E agora para removermos um container precisamos primeiramente parar-lo e em seguida utilizamos o seguinte comando
+```bash
+docker stop containerRemover
+docker container rm containerRemover
+```
 
 # Dockerfile
 ## O que é?
