@@ -2,33 +2,45 @@ version: '3.4'
 
 services:
   app: 
-    image: vuejs-front
-    container_name: composeVuejsFront
+    image: frontvue
+    container_name: composevuejsfront
     ports: 
       - 8080:80
-    links:
-      - api:api-pessoa
 
     depends_on:
       - api
       - db
+    networks:
+      labnet:
+        ipv4_address: "172.12.200.12"
   
   api:
-    image: nodejs-api-server
-    container_name: composeApiPessoa
+    image: nodejsapiserver
+    container_name: composeapipessoa
     ports: 
       - 3333:3333
-    links:
-      - db:database-pessoa
     depends_on:
       - db
+    networks:
+      labnet:
+        ipv4_address: "172.12.200.11"
 
   db:
     image: mysql
-    container_name: composeExemploMySql
+    container_name: composeexemplomysql
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=teste
     ports:
       - 3306:3306
+    networks:
+      labnet:
+        ipv4_address: "172.12.200.10"
 
+networks:
+  labnet:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.12.200.0/24
