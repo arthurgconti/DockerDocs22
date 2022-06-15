@@ -125,7 +125,7 @@ export default defineComponent({
   },
   setup() {
     onMounted(() => {
-      loadingRef.value = true;
+      loadingRef.value = true; 
       Api.get("/pessoas")
         .then((response) => {
           dataRef.value = response.data;

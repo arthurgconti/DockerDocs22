@@ -2,45 +2,38 @@ version: '3.4'
 
 services:
   app: 
-    image: frontvue
-    container_name: composevuejsfront
+    image: app-labso
+    container_name: compose-app-labso
     ports: 
       - 80:8080
+    environment:
+      - VITE_BASE_IP=http://44.204.192.254
+      - VITE_API_PORT=3333
 
     depends_on:
       - api
       - db
-    networks:
-      labnet:
-        ipv4_address: "172.12.200.12"
   
+
+  #TODO in documentation remember to update this ip for the instance
+  #TODO in documentation remember to explain how to run migration
   api:
-    image: nodejsapiserver
-    container_name: composeapipessoa
+    image: api-labso
+    container_name: compose-api-labso
+    environment:
+      - DATABASE_URL=mysql://root:root@44.204.192.254:3306/labso
+      - VITE_BASE_IP=http://44.204.192.254:3333/
     ports: 
       - 3333:3333
     depends_on:
       - db
-    networks:
-      labnet:
-        ipv4_address: "172.12.200.11"
 
+#TODO volumes to maintain data
   db:
     image: mysql
-    container_name: composeexemplomysql
+    container_name: compose-bd-labso
     environment:
       - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=teste
+      - MYSQL_DATABASE=labso
     ports:
       - 3306:3306
-    networks:
-      labnet:
-        ipv4_address: "172.12.200.10"
-
-networks:
-  labnet:
-    driver: bridge
-    ipam:
-      driver: default
-      config:
-      - subnet: 172.12.200.0/24
