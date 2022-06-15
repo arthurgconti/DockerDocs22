@@ -215,4 +215,7 @@ RUN npm install
 # Rodando npm start após a criação do container para o container já subir com o servidor inicializado
 CMD ["npm","start"]
 ```
+anotação docker compose
+isso é pra rodar a migration, deixar anotado
+docker exec -it compose-api-labso bash -c "npx prisma db push"
 
