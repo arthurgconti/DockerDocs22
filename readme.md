@@ -148,7 +148,7 @@ docker exec -it exemploMySql mysql -uroot -proot
 # Dentro do terminal do mysql digitamos para vermos se o banco está criado
 show databases;
 # Após isso executamos para ver se nossa tabela está criada corretamente dentro do banco
-use teste; show tables;
+use labso; show tables;
 # Após isso podemos usar o select e confirmar se os dados foram inseridos corretamentes
 select * from pessoa;
 # E finalmente para sairmos do terminal basta digitar o comando
@@ -163,7 +163,7 @@ docker container rm containerRemover
 # Dockerfile
 ## O que é?
 - Dockerfile nada mais é do que um arquivo onde conseguimos especificar todos os comandos que poderiamos passar pela linha de comando para criarmos nossa própria imagem
-- Após escrevermos todas as instruções basta rodar o comando 
+- Após escrevermos todas as instruções, basta rodar o comando 
 ```
 docker build -f [file] -t [tagname] [PATH] 
 ```
@@ -207,14 +207,31 @@ COPY package.json .
 # Copiando o server.js da pasta atual para a pasta server-example do container
 ADD server.js .
 # Documentando que o container terá a porta 3000 exposta
-EXPOSE 3000
+EXPOSE 3333
 
   
 # rodando npm install durante a criação da imagem, para quando baixarmos ela já vir com o node_modules pronto
-RUN npm install
+RUN npm install --production
 # Rodando npm start após a criação do container para o container já subir com o servidor inicializado
 CMD ["npm","start"]
 ```
+
+- Após montarmos o Dockerfile, precisamos criar essa image, para fazer isso, basta rodar o docker build
+- *obs: para o usarmos o '.', precisamos estar na pasta em que existe o Dockerfile, caso contrário é necessário passar o caminho para esse dockerfile*
+ ```bash
+ docker build -t nodejs-server .
+ ```
+- dessa forma se rodarmos o docker images veremos nossa imagem criada e pronta para ser instanciada com o comando docker run.
+![Docker Images](imgs/dockerImagesServer.png)
+```bash
+docker run --rm -d --name server-labso nodejs-server
+# Se estiver rodando o container na sua máquina, precisamos pegar o ip para poder acessar ela, usamos o seguinte comando para saber qual o ip
+docker inspect server-labso | grep IPAddress
+```
+
+# Docker Compose
+## O que é?
+## Como é um arquivo docker-compose?
 anotação docker compose
 isso é pra rodar a migration, deixar anotado
 docker exec -it compose-api-labso bash -c "npx prisma db push"
