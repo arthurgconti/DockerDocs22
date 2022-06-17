@@ -162,7 +162,7 @@ docker container rm containerRemover
 
 # Dockerfile
 ## O que é?
-- Dockerfile nada mais é do que um arquivo onde conseguimos especificar todos os comandos que poderiamos passar pela linha de comando para criarmos nossa própria imagem
+- Dockerfile nada mais é do que um arquivo onde conseguimos especificar todos os comandos que poderíamos passar pela linha de comando para criarmos nossa própria imagem
 - Após escrevermos todas as instruções, basta rodar o comando 
 ```
 docker build -f [file] -t [tagname] [PATH] 
@@ -174,20 +174,14 @@ docker build -f [file] -t [tagname] [PATH]
 - Temos também o PATH, o PATH especifica onde encontrar os arquivos para o contexto de criação da imagem, o path pode ser um caminho para pasta, uma url ou até mesmo um repositório do git, aqui, nos limitaremos a trabalhar só com o caminho para pastas locais
 
 ## Como é um Dockerfile?
-- O Dockerfile, possui diversos comandos para dar suporte a criação de uma imagem customizada, veremos alguns exemplos e detalharemos alguns dos comandos principais!
-
-```Dockerfile
-FROM
-COPY 
-CMD
-```
+- O Dockerfile, possui diversos comandos para dar suporte a criação de uma imagem customizada, veremos alguns exemplos e detalharemos alguns dos comandos principais, vale ressaltar que obrigatoriamente, um arquivo dockerfile deve ser nomeado como Dockerfile!
 
 | Instruções    | Função                                                                                                                                                           |
 | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| FROM       | Ponto de partida para a criação de uma imagem, se quiser algo baseado em Mysql, pode especificar, se quiser fazer uma imagem do zero, basta infromar **SCRATCH** |
+| FROM       | Ponto de partida para a criação de uma imagem, se quiser algo baseado em Mysql, pode especificar, se quiser fazer uma imagem do zero, basta informar **SCRATCH** |
 | RUN        | Pode ser executada uma ou mais vezes, definimos quais os comandos serão executados nas etapas de criação de uma imagem.                                          |
 | CMD        | Definimos quais comandos serão executados na etapa de criação do container, caso o container não tenha nenhum comando                                            |
-| ENTRYPOINT | A mesma coisa que o *CMD* porém seus parâmetros não são sobreescritos                                                                                            |
+| ENTRYPOINT | A mesma coisa que o *CMD*, porém seus parâmetros não são sobrescritos                                                                                            |
 | ADD        | Fazer cópia de arquivos, diretório ou até mesmo baixar arquivos, na máquina host para a imagem                                                                   |
 | COPY       | Permite apenas a passagem de arquivos ou diretórios, diferente do *ADD* que permite downloads                                                                    |
 | EXPOSE     | Serve para documentar qual a porta será exposta, mas efetivamente **não** publica a porta                                                                        |
@@ -228,10 +222,33 @@ docker run --rm -d --name server-labso nodejs-server
 # Se estiver rodando o container na sua máquina, precisamos pegar o ip para poder acessar ela, usamos o seguinte comando para saber qual o ip
 docker inspect server-labso | grep IPAddress
 ```
-
+- e com isso podemos acessar a api pelo navegador ou fazer requisições
+![Docker acessando](imgs/server-on-web.png)
 # Docker Compose
 ## O que é?
+- O Docker compose é uma ferramenta para definir e rodar multiplos containers de aplicação, para o docker compose, utilizamos um arquivo do tipo YAML para configurar as aplicações, então com um único comando, conseguimos criar e iniciar todos os serviços configurados no arquivo.
 ## Como é um arquivo docker-compose?
+- Assim como no dockerfile precisamos que esse arquivos seja nomeado como Dockerfile, no compose, precisamos nomear o arquivo como **docker-compose.yml** ou **docker-compose.yaml**
+- Um docker compose possui uma estrutura básica e vamos explicar ela agora
+```yaml
+version: '3.4'
+
+services:
+	service_name:
+		image: image_name
+		ports: 0000:0000
+		volumes:
+			- ./pathFolder:/containerPath
+		environment:
+			- KEY=VALUE
+		depends_on:
+			- service
+			- 
+volumes:
+	- 
+	
+```
+
 anotação docker compose
 isso é pra rodar a migration, deixar anotado
 docker exec -it compose-api-labso bash -c "npx prisma db push"

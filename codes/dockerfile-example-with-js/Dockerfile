@@ -1,4 +1,4 @@
-FROM node
+FROM nodedocker compose
 WORKDIR /server-example
 COPY package.json .
 ADD server.js .

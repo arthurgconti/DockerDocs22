@@ -4,7 +4,7 @@
     "type": "split",
     "children": [
       {
-        "id": "0ba74be42daaea2d",
+        "id": "14476aaf1c2650dc",
         "type": "leaf",
         "state": {
           "type": "markdown",
@@ -104,17 +104,17 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "0ba74be42daaea2d",
+  "active": "14476aaf1c2650dc",
   "lastOpenFiles": [
     "readme.md",
+    "imgs/ctop.png",
+    "imgs/dockerImagesServer.png",
     "docker-steps.md",
     "mindMap.png",
     "imgs/docker-stop-container.png",
     "imgs/docker-ps-a.png",
     "imgs/docker-images.png",
-    "imgs/ctop.png",
     "MyMindMap.md",
-    "Levantamento de informações.md",
-    "MindMap.md"
+    "Levantamento de informações.md"
   ]
 }

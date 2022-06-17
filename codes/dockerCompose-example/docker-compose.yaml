@@ -21,12 +21,14 @@ services:
     image: api-labso
     container_name: compose-api-labso
     environment:
-      - DATABASE_URL=mysql://root:root@44.204.192.254:3306/labso
-      - VITE_BASE_IP=http://44.204.192.254:3333/
+      - DATABASE_URL=mysql://root:root@172.22.0.2:3306/labso
     ports: 
       - 3333:3333
+    command: bash -c "npx prisma db push && npm run start"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+        
 
 #TODO volumes to maintain data
   db:
@@ -37,3 +39,7 @@ services:
       - MYSQL_DATABASE=labso
     ports:
       - 3306:3306
+    healthcheck:
+      test: mysqladmin ping -h 172.20.0.2 -u root -p$$MYSQL_ROOT_PASSWORD
+      retries: 10
+
