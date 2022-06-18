@@ -10,7 +10,7 @@
           "type": "markdown",
           "state": {
             "file": "readme.md",
-            "mode": "source",
+            "mode": "preview",
             "source": true
           }
         }
@@ -53,7 +53,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "0068a28edd50c983",
@@ -107,14 +108,14 @@
   "active": "14476aaf1c2650dc",
   "lastOpenFiles": [
     "readme.md",
-    "imgs/ctop.png",
-    "imgs/dockerImagesServer.png",
-    "docker-steps.md",
-    "mindMap.png",
+    "imgs/dockerhub.png",
     "imgs/docker-stop-container.png",
+    "imgs/docker-start-container.png",
+    "imgs/docker-run-without-image.png",
+    "imgs/docker-run-mysql-ps-a.png",
     "imgs/docker-ps-a.png",
+    "imgs/docker-logs.png",
     "imgs/docker-images.png",
-    "MyMindMap.md",
-    "Levantamento de informações.md"
+    "imgs/ctop.png"
   ]
 }

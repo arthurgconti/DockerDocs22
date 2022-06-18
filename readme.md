@@ -245,11 +245,151 @@ services:
 			- service
 			- 
 volumes:
-	- 
+	volume:
+
+networks:
+	mydata:
+	
 	
 ```
+- Dessas partes vamos detalhar elas
+	- ***version*** especifica qual a versão do docker-compose vamos utilizar
+	- ***services*** é a parte onde definimos todos nossos serviços, ou nossos container que serão instanciados, dentro de service, definimos um nome para o service e podemos passar outras informações como
+		- **image**: imagem base para o container
+		- **ports**: porta que será exposta para nosso container seguindo padrão host:container
+		- **volumes**: volume que será criado para o container, assim como a flag -v do docker run
+		- **enviroment**: variáveis de ambiente para o container
+		- **depends_on**: basicamente nos informa que antes daquele container subir, o container que esta no depends on precisa já estar rodando, ou seja, através dele conseguimos controlar a ordem em que os containers sobem.
+	- ***volumes*** é onde definimos os volumes que serão utilizados, aqui, pasta passar o nome do volume pois podemos definir a pasta diretamente no *service*
+	- ***networks*** é onde usamos para criar redes internas entre os containers e depois passamos isso dentro do service em network
 
-anotação docker compose
-isso é pra rodar a migration, deixar anotado
-docker exec -it compose-api-labso bash -c "npx prisma db push"
+- Vale ressaltar, que existem partes que não são obrigatórias, porém obrigatoriamente precisamos definir os services e dependendo de como vamos trabalhar com o docker compose, é sempre bom definir a versão do docker compose
+- por exemplo, por padrão, o próprio docker-compose cria uma network para aqueles serviços que estão 
 
+- Agora que já falamos dessa parte, vamos a um exemplo prático para essa disciplina, nesse exemplo, vamos instanciar um banco de dados, uma api e também uma interface web, cada um em um container e todos se comunicando!
+```yml
+version: '3.4'
+
+#Definição dos serviços
+services:
+
+#container app, ele terá nossa interface
+  app: 
+  #image sendo utilizada, essa imagem será construida através do Dockerfile
+    image: app-labso
+    #container_name é onde damos um nome customizado ao container que o docker-compose sobe
+    container_name: compose-app-labso
+    #ports onde mapeamos a porta host:contaier
+    ports: 
+      - 80:8080
+    #enviroment passamos as variáveis de ambiente para essa aplicação, isso pode ser feito através de um .env por exemplo
+    environment:
+      - VITE_BASE_IP=http://0.0.0.0
+      - VITE_API_PORT=3333
+#depends_on é onde falamos qual o container precisa subir antes desse
+# nesse caso, nosso container app, só subirá depois que o container de bd e o da api subirem
+    depends_on:
+      - api
+      - db
+  
+
+#container api, esse container terá nossa api
+  api:
+    image: api-labso
+    container_name: compose-api-labso
+    environment:
+      - DATABASE_URL=mysql://root:root@0.0.0.0:3306/labso
+    ports: 
+      - 3333:3333
+    #command sobrescreve o CMD da imagem, nessa caso, assim que o container subir ele ira rodar uma migration e depois iniciará o servidor da api
+    command: bash -c "npx prisma db push && npm run start"
+    #nesse depends_on, temos um condition, esse condition nos diz que nosso container de api só subira depois que o container db subir e ele estiver em um estado saudável
+    # como queremos rodar uma migration nesse banco de dados, precisamos que além dele estar instanciado, precisamos que ele já esteja inicializado e podendo receber conexões
+    # então dentro do container de bd a gente vai definir o que para aquele container é estar healthy
+    depends_on:
+      db:
+        condition: service_healthy
+        
+
+#TODO volumes to maintain data
+  db:
+    image: mysql
+    container_name: compose-bd-labso
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=labso
+    ports:
+      - 3306:3306
+	#healthcheck é onde a gente vai definir um teste para nos dizer se o container está healthy/saudável ou não
+	# nesse caso, como precisamos que o container esteja rodando e aceitando conexões, passamos que o teste desse container é dar um ping nele mesmo com o usuário root
+	# caso o teste passe, ele nos retorna que o container é healthy e o container de api pode subir.
+    healthcheck:
+      test: mysqladmin ping -h 0.0.0.0 -u root -p$$MYSQL_ROOT_PASSWORD
+      retries: 10
+```
+
+- Agora que temos nosso arquivo docker-compose precisamos subir ele, porém, como temos imagem customizada, precisaremos criar essas imagens
+- Nossa imagem do app terá o seguinte Dockerfile:
+```Dockerfile
+FROM node:lts-alpine
+
+RUN npm install -g http-server
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 8080
+CMD ["http-server","dist"]
+```
+
+- Nossa imagem da api terá o seguinte Dockerfile:
+```Dockerfile
+FROM node
+WORKDIR /server-example
+COPY package.json .
+ADD *.js ./
+COPY prisma/* ./prisma/
+COPY controller/* ./controller/
+EXPOSE 3333
+
+RUN npm install --production
+RUN ["npx","prisma","generate"]
+CMD ["npm","start"]
+```
+
+- Após criar precisaremos criar essas duas imagens, rodamos então os seguintes comandos
+```bash
+cd frontend-vue
+docker build -t app-labso .
+cd ../backend
+docker build -t api-labso .
+```
+
+- Após o build feito, se usarmos *docker images* veremos que as imagens já estão lá!
+- Dessa forma podemos agora então, rodar o docker compose para subir nossos containers
+```bash
+cd ..
+docker-compose up -d
+```
+
+
+- dentro da CLI do docker-compose temos diversos comandos, vamos mostrar algum deles além do up
+
+| Comando | Significado | Descrição                                                                 | Parametro                                                                        |    
+| ------- | ----------- | ------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | 
+| up      | subir       | Cria e inicia os containers  dos serviços                                 | podemos usar a flag *--no-start* para somente criar os containers sem inicia-los | 
+| down    | descer      | Para todos os serviços e remove os recursos, networks, containers, etc... | nenhum                                                                           | 
+| start   | iniciar     | Inicia os serviços                                                        | nenhum                                                                           | 
+| stop    | parar       | Para  os containers dos serviços                                          | nenhum                                                                           | 
+| images  | imagens     | Lista as imagens                                                          | nenhum                                                                           | 
+| rm      | remove      | remove/apaga todos os containers parados                                  | nenhum                                                                           | 
+| top     | topo        | Mostro todos os processos rodando                                         | nenhum                                                                           | 
+| kill    | derrubar    | Derruba os containers                                                     | nenhum                                                                           | 
+
+- Vale lembrar, que todos esses comandos são feitos baseados no docker-compose.yml, então para funcionar, eles precisam ser executado na pasta que contenha o arquivo, ou você especificando o caminho para ele.
+- No caso, por exemplo, do comando *docker-compose rm*, ele não ira remover TODOS os containers que você cria que estão parados, ele ira remover todos os containers de serviço que o docker-compose.yml definiu, ou seja, todos os containers parados referente a esse arquivo serão apagados.

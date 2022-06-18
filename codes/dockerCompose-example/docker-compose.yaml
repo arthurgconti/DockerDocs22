@@ -15,8 +15,6 @@ services:
       - db
   
 
-  #TODO in documentation remember to update this ip for the instance
-  #TODO in documentation remember to explain how to run migration
   api:
     image: api-labso
     container_name: compose-api-labso
@@ -40,6 +38,6 @@ services:
     ports:
       - 3306:3306
     healthcheck:
-      test: mysqladmin ping -h 172.20.0.2 -u root -p$$MYSQL_ROOT_PASSWORD
-      retries: 10
+      test: mysqladmin ping -h 172.20.0.2 -u root -p$$MYSQL_ROOT_PASSWORD || exit 1
+      retries: 3
 
