@@ -282,27 +282,30 @@ services:
     #ports onde mapeamos a porta host:contaier
     ports: 
       - 80:8080
-    #enviroment passamos as variáveis de ambiente para essa aplicação, isso pode ser feito através de um .env por exemplo
-    environment:
-      - VITE_BASE_IP=http://0.0.0.0
-      - VITE_API_PORT=3333
+
+
 #depends_on é onde falamos qual o container precisa subir antes desse
 # nesse caso, nosso container app, só subirá depois que o container de bd e o da api subirem
     depends_on:
-      - api
-      - db
-  
+        api:
+          condition: service_healthy
+    
 
 #container api, esse container terá nossa api
   api:
     image: api-labso
     container_name: compose-api-labso
+     #enviroment passamos as variáveis de ambiente para essa aplicação, isso pode ser feito através de um .env por exemplo
     environment:
       - DATABASE_URL=mysql://root:root@0.0.0.0:3306/labso
     ports: 
       - 3333:3333
     #command sobrescreve o CMD da imagem, nessa caso, assim que o container subir ele ira rodar uma migration e depois iniciará o servidor da api
     command: bash -c "npx prisma db push && npm run start"
+    healthcheck:
+      test: curl --fail http://0.0.0.0:3333/pessoas || exit 1
+      retries: 3
+      interval: 3s
     #nesse depends_on, temos um condition, esse condition nos diz que nosso container de api só subira depois que o container db subir e ele estiver em um estado saudável
     # como queremos rodar uma migration nesse banco de dados, precisamos que além dele estar instanciado, precisamos que ele já esteja inicializado e podendo receber conexões
     # então dentro do container de bd a gente vai definir o que para aquele container é estar healthy
