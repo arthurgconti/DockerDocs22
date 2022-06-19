@@ -7,26 +7,29 @@ services:
     ports: 
       - 80:8080
     environment:
-      - VITE_BASE_IP=http://44.204.192.254
+      - VITE_BASE_IP=http://52.23.184.92
       - VITE_API_PORT=3333
 
     depends_on:
-      - api
-      - db
+        api:
+          condition: service_healthy
   
 
   api:
     image: api-labso
     container_name: compose-api-labso
     environment:
-      - DATABASE_URL=mysql://root:root@172.22.0.2:3306/labso
+      - DATABASE_URL=mysql://root:root@52.23.184.92:3306/labso
     ports: 
       - 3333:3333
     command: bash -c "npx prisma db push && npm run start"
+    healthcheck:
+      test: curl --fail http://52.23.184.92:3333/pessoas || exit 1
+      retries: 3
+      interval: 3s
     depends_on:
       db:
         condition: service_healthy
-        
 
 #TODO volumes to maintain data
   db:
@@ -38,6 +41,6 @@ services:
     ports:
       - 3306:3306
     healthcheck:
-      test: mysqladmin ping -h 172.20.0.2 -u root -p$$MYSQL_ROOT_PASSWORD || exit 1
+      test: mysqladmin ping -h 52.23.184.92 -u root -p$$MYSQL_ROOT_PASSWORD || exit 1
       retries: 3
 
