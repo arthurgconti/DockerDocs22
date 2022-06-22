@@ -1,0 +1,12 @@
+#!/bin/bash
+
+echo installing node
+asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+asdf install nodejs 16.15.1
+
+echo setting node version globally
+asdf global nodejs 16.15.1
+
+echo everthing is great!
+echo node version installed
+node --version
