@@ -10,3 +10,9 @@ asdf global nodejs 16.15.1
 echo everthing is great!
 echo node version installed
 node --version
+which node
+echo npm version installed
+npm --version
+which npm
+
+echo you are in $PWD
