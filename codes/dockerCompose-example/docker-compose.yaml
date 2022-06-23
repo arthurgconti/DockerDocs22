@@ -6,10 +6,6 @@ services:
     container_name: compose-app-labso
     ports: 
       - 80:8080
-    environment:
-      - VITE_BASE_IP=http://52.23.184.92
-      - VITE_API_PORT=3333
-
     depends_on:
         api:
           condition: service_healthy
