@@ -1,0 +1,44 @@
+version: '3.4'
+
+services:
+  app: 
+    image: app-labso
+    container_name: compose-app-labso
+    ports: 
+      - 80:8080
+    depends_on:
+        api:
+          condition: service_healthy
+  
+
+  api:
+    image: api-labso
+    container_name: compose-api-labso
+    environment:
+      - DATABASE_URL=mysql://root:root@34.203.252.2:3306/labso
+    ports: 
+      - 3333:3333
+    command: bash -c "npx prisma db push && npm run start"
+    healthcheck:
+      test: curl --fail http://34.203.252.2:3333/pessoas || exit 1
+      retries: 3
+      interval: 3s
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mysql
+    container_name: compose-bd-labso
+    volumes:
+      - /opt/mysql_data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=labso
+    ports:
+      - 3306:3306
+    healthcheck:
+      test: mysqladmin ping -h 34.203.252.2 -u root -p$$MYSQL_ROOT_PASSWORD || exit 1
+      retries: 3
+
+

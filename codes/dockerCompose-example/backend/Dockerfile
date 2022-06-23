@@ -1,4 +1,4 @@
-FROM node
+FROM node:lts-alpine
 WORKDIR /server-example
 COPY package.json .
 ADD *.js ./
