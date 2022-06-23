@@ -27,7 +27,6 @@ services:
       db:
         condition: service_healthy
 
-#TODO volumes to maintain data
   db:
     image: mysql
     container_name: compose-bd-labso
